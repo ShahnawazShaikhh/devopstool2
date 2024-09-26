@@ -1,12 +1,12 @@
-name: Java CI
+name: Build, Test, and Push Docker Image
 
 on:
   push:
     branches:
-      - main
+      - main  # Change this to your default branch
   pull_request:
     branches:
-      - main
+      - main  # Change this to your default branch
 
 jobs:
   build:
@@ -16,14 +16,25 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up JDK 11
+    - name: Set up JDK
       uses: actions/setup-java@v2
       with:
-        java-version: '11'
+        java-version: '11'  # Change this to your desired JDK version
         distribution: 'adopt'
 
     - name: Build with Maven
       run: mvn clean install
 
-    - name: Run tests
-      run: mvn test
+    - name: Build Docker image
+      run: |
+        docker build -t sandy326/devopstool:latest .
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_sandy326 }}  # Make sure this matches your secret name
+        password: ${{ secrets.DOCKER_admin@#321 }}  # Make sure this matches your secret name
+
+    - name: Push Docker image
+      run: |
+        docker push sandy326/devopstool:latest
