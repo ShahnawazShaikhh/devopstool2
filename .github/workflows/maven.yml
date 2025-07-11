@@ -48,11 +48,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Build WAR using Maven
+        run: mvn clean package
+
       - name: Login to Nexus Docker Registry
         run: echo "${{ secrets.NEXUS_PASSWORD }}" | docker login 192.168.74.129:8083 -u ${{ secrets.NEXUS_USERNAME }} --password-stdin
 
       - name: Build Docker Image
-        run: docker build -t 192.168.74.129:8083/docker-hosted/devopstool-new:latest .
+        run: docker build -t 192.168.74.129:8083/devopstool-new:latest .
 
       - name: Push Image to Nexus
-        run: docker push 192.168.74.129:8083/docker-hosted/devopstool-new:latest
+        run: docker push 192.168.74.129:8083/devopstool-new:latest
