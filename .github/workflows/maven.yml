@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Cache Maven packages
         uses: actions/cache@v3
@@ -36,7 +36,7 @@ jobs:
         run: mvn clean package
 
       - name: Archive WAR for next job
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4   # ✅ updated to v4
         with:
           name: devopstool-war
           path: target/devopstool.war
@@ -48,15 +48,15 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Download WAR artifact from Windows job
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4   # ✅ updated to v4
         with:
           name: devopstool-war
           path: target
 
-      - name: Install Maven (for safety, optional)
+      - name: Install Maven (optional safeguard)
         run: |
           if ! command -v mvn &> /dev/null; then
             sudo yum install -y maven
