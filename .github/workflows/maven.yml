@@ -48,12 +48,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Build Docker Image
-        run: |
-          docker build -t ${{ secrets.NEXUS_URL }}/devopstool-new:latest .
+      - name: Login to Nexus Docker Registry
+        run: echo "${{ secrets.NEXUS_PASSWORD }}" | docker login 192.168.74.129:8083 -u ${{ secrets.NEXUS_USERNAME }} --password-stdin
 
-      - name: Login to Nexus Registry
-        run: echo "${{ secrets.NEXUS_PASSWORD }}" | docker login ${{ secrets.NEXUS_URL }} -u ${{ secrets.NEXUS_USERNAME }} --password-stdin
+      - name: Build Docker Image
+        run: docker build -t 192.168.74.129:8083/docker-hosted/devopstool-new:latest .
 
       - name: Push Image to Nexus
-        run: docker push ${{ secrets.NEXUS_URL }}/devopstool-new:latest
+        run: docker push 192.168.74.129:8083/docker-hosted/devopstool-new:latest
