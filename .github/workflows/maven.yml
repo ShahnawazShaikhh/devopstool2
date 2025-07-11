@@ -31,13 +31,15 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
 
-      - name: Build project
+      - name: Build project (WAR)
         shell: cmd
         run: mvn clean package
 
-      - name: Run unit tests
-        shell: cmd
-        run: mvn test
+      - name: Archive WAR for next job
+        uses: actions/upload-artifact@v3
+        with:
+          name: devopstool-war
+          path: target/devopstool.war
 
   cd-linux:
     name: Docker Build and Push on Linux
@@ -48,8 +50,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Build WAR using Maven
-        run: mvn clean package
+      - name: Download WAR artifact from Windows job
+        uses: actions/download-artifact@v3
+        with:
+          name: devopstool-war
+          path: target
+
+      - name: Install Maven (for safety, optional)
+        run: |
+          if ! command -v mvn &> /dev/null; then
+            sudo yum install -y maven
+          fi
 
       - name: Login to Nexus Docker Registry
         run: echo "${{ secrets.NEXUS_PASSWORD }}" | docker login 192.168.74.129:8083 -u ${{ secrets.NEXUS_USERNAME }} --password-stdin
