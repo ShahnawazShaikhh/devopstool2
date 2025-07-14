@@ -70,3 +70,9 @@ jobs:
 
       - name: Push Image to Nexus
         run: docker push 192.168.74.129:8083/devopstool-new:latest
+
+      - name: 🚀 Deploy WAR to Tomcat using local script
+        run: |
+          echo "Running deploy_to_tomcat.sh on agent machine..."
+          chmod +x /opt/tomcat/apache-tomcat-9.0.96/deploy_to_tomcat.sh
+          /opt/tomcat/apache-tomcat-9.0.96/deploy_to_tomcat.sh
