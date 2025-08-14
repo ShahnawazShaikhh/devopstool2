@@ -24,7 +24,6 @@
     </properties>
 
     <dependencies>
-        <!-- Spring Boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -42,23 +41,19 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- 🔥 Vulnerable Dependencies for Xray Testing -->
-
-        <!-- Vulnerable Log4j -->
+        <!-- Vulnerable Dependencies for Testing -->
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
 
-        <!-- Vulnerable Commons Collections -->
         <dependency>
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
             <version>3.2.1</version>
         </dependency>
 
-        <!-- Vulnerable Jackson Databind -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
@@ -77,3 +72,4 @@
     </build>
 
 </project>
+
