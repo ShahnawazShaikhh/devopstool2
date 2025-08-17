@@ -1,99 +1,80 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-         
-    <modelVersion>4.0.0</modelVersion>
-    
-    <parent>
+<dependencies>
+    <!-- Spring Boot Dependencies -->
+    <dependency>
         <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.8</version>
-        <relativePath/> <!-- Fetch parent from repository -->
-    </parent>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
 
-    <groupId>com.example</groupId>
-    <artifactId>devopstool</artifactId>
-    <packaging>war</packaging>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>devopstool</name>
-    <description>Demo project for Spring Boot</description>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-tomcat</artifactId>
+        <scope>provided</scope>
+    </dependency>
 
-    <properties>
-        <java.version>17</java.version> <!-- Match your Jenkins Java version -->
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
-    </properties>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <scope>test</scope>
+    </dependency>
 
-    <dependencies>
-        <!-- Spring Boot Dependencies -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
+    <!-- Vulnerable Dependencies for Testing -->
+    <dependency>
+        <groupId>log4j</groupId>
+        <artifactId>log4j</artifactId>
+        <version>1.2.17</version> <!-- CVE-2019-17571 -->
+    </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
-        </dependency>
+    <dependency>
+        <groupId>commons-collections</groupId>
+        <artifactId>commons-collections</artifactId>
+        <version>3.2.1</version> <!-- CVE-2015-6420 -->
+    </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>2.9.5</version> <!-- CVE-2018-7489 -->
+    </dependency>
 
-        <!-- Vulnerable Dependencies for Testing -->
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
-        </dependency>
+    <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpclient</artifactId>
+        <version>4.5.2</version> <!-- Known CVEs -->
+    </dependency>
 
-        <dependency>
-            <groupId>commons-collections</groupId>
-            <artifactId>commons-collections</artifactId>
-            <version>3.2.1</version>
-        </dependency>
+    <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-text</artifactId>
+        <version>1.7</version> <!-- CVE-2020-17530 -->
+    </dependency>
 
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.9.5</version>
-        </dependency>
-    </dependencies>
+    <dependency>
+        <groupId>xerces</groupId>
+        <artifactId>xercesImpl</artifactId>
+        <version>2.11.0</version> <!-- CVE-2012-0881 -->
+    </dependency>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-        <finalName>devopstool</finalName>
-    </build>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-core</artifactId>
+        <version>4.3.0.RELEASE</version> <!-- CVE-2018-1273 -->
+    </dependency>
 
-    <!-- Maven Central Repository -->
-    <repositories>
-        <repository>
-            <id>central</id>
-            <name>Maven Central Repository</name>
-            <url>https://repo.maven.apache.org/maven2/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
+    <dependency>
+        <groupId>commons-beanutils</groupId>
+        <artifactId>commons-beanutils</artifactId>
+        <version>1.9.2</version> <!-- CVE-2019-10086 -->
+    </dependency>
 
-    <pluginRepositories>
-        <pluginRepository>
-            <id>central</id>
-            <url>https://repo.maven.apache.org/maven2/</url>
-        </pluginRepository>
-    </pluginRepositories>
+    <dependency>
+        <groupId>commons-fileupload</groupId>
+        <artifactId>commons-fileupload</artifactId>
+        <version>1.3.1</version> <!-- CVE-2019-17571 -->
+    </dependency>
 
-</project>
+    <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-core</artifactId>
+        <version>2.8.2</version> <!-- CVE-2019-17571 -->
+    </dependency>
+</dependencies>
